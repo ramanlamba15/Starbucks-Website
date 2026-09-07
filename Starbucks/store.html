@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Store Locator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar (copied from index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gift.html">GIFT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="oder.html">ORDER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pay.html">PAY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="store.html">STORE</a>
+                    </li>
+                </ul>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" placeholder="Looking for something specific?">
+                </div>
+                <a href="#" class="account-icon">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Store Locator Hero -->
+    <section class="store-hero">
+        <div class="container">
+            <div class="search-container">
+                <h1>Find a Starbucks Store</h1>
+                <div class="search-box">
+                    <input type="text" class="form-control" placeholder="Enter location or ZIP code">
+                    <button class="btn btn-success">
+                        <i class="fas fa-search"></i> Find Stores
+                    </button>
+                </div>
+                <div class="quick-filters">
+                    <button class="filter-btn active">All Stores</button>
+                    <button class="filter-btn">Drive-Thru</button>
+                    <button class="filter-btn">Reserve Bar</button>
+                    <button class="filter-btn">24 Hours</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Listing Section -->
+    <section class="store-section">
+        <div class="container">
+            <div class="row">
+                <!-- Store List -->
+                <div class="col-md-4">
+                    <div class="store-list">
+                        <div class="store-card">
+                            <div class="store-status open">Open Now</div>
+                            <h3>Downtown Store</h3>
+                            <p class="address">123 Main Street, City, State 12345</p>
+                            <div class="store-features">
+                                <span><i class="fas fa-car"></i> Drive-Thru</span>
+                                <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                            </div>
+                            <div class="store-hours">
+                                <p>Today's Hours: 6:00 AM - 9:00 PM</p>
+                            </div>
+                            <div class="store-actions">
+                                <button class="btn btn-outline-success">
+                                    <i class="fas fa-directions"></i> Directions
+                                </button>
+                                <button class="btn btn-success">
+                                    <i class="fas fa-mug-hot"></i> Order Here
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- More store cards -->
+                        <div class="store-card">
+                            <div class="store-status closed">Closed</div>
+                            <h3>Mall Location</h3>
+                            <p class="address">456 Shopping Center, City, State 12345</p>
+                            <div class="store-features">
+                                <span><i class="fas fa-wifi"></i> Free WiFi</span>
+                                <span><i class="fas fa-parking"></i> Parking</span>
+                            </div>
+                            <div class="store-hours">
+                                <p>Opens Tomorrow: 7:00 AM - 8:00 PM</p>
+                            </div>
+                            <div class="store-actions">
+                                <button class="btn btn-outline-success">
+                                    <i class="fas fa-directions"></i> Directions
+                                </button>
+                                <button class="btn btn-success" disabled>
+                                    <i class="fas fa-mug-hot"></i> Order Here
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <div class="col-md-8">
+                    <div class="map-container">
+                        <div class="map-overlay">
+                            <div class="map-features">
+                                <button class="map-feature" onclick="toggleMapType()">
+                                    <i class="fas fa-layer-group"></i>
+                                </button>
+                                <button class="map-feature" onclick="getCurrentLocation()">
+                                    <i class="fas fa-location-arrow"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Navbar Styles (copied from index.html) */
+        .navbar {
+            background-color: #1e3932;
+        }
+        .navbar-brand img {
+            width: 50px;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        .search-bar {
+            position: relative;
+            width: 300px;
+        }
+        .search-bar input {
+            border-radius: 20px;
+            padding-left: 35px;
+        }
+        .search-bar i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .account-icon {
+            color: white;
+            font-size: 1.2rem;
+            margin-left: 20px;
+        }
+
+        /* Store Page Specific Styles */
+        .store-hero {
+            background: linear-gradient(rgba(30, 57, 50, 0.9), rgba(30, 57, 50, 0.9)),
+                        url('https://globalassets.starbucks.com/assets/a039a014a8514c42b7be575f6a9854e6.jpg');
+            background-size: cover;
+            padding: 60px 0;
+            color: white;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quick-filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: white;
+            color: #1e3932;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .store-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .store-status.open {
+            background: #dcf5e7;
+            color: #0a6634;
+        }
+
+        .store-status.closed {
+            background: #ffe5e5;
+            color: #dc3545;
+        }
+
+        .store-features {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .store-features span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .store-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .map-container {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 600px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1;
+        }
+
+        .map-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .map-feature {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .map-feature:hover {
+            background: #1e3932;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .store-hero {
+                padding: 40px 0;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .map-container {
+                margin-top: 20px;
+                height: 400px;
+            }
+        }
+    </style>
+
+    <script src="https://maps.app.goo.gl/mx4ZtYTWNht6rDBE7"></script>
+        <script>
+            // Initialize map
+            let map;
+            let currentMapType = 'roadmap';
+            
+            function initMap() {
+                // Default location (Starbucks HQ Seattle)
+                const defaultLocation = { lat: 47.5809, lng: -122.3363 };
+                
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: defaultLocation,
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    styles: [
+                        {
+                            "featureType": "all",
+                            "elementType": "geometry",
+                            "stylers": [{ "color": "#f5f5f5" }]
+                        },
+                        {
+                            "featureType": "poi.business",
+                            "elementType": "labels.icon",
+                            "stylers": [{ "color": "#1e3932" }]
+                        }
+                    ]
+                });
+        
+                // Add sample markers for Starbucks locations
+                const locations = [
+                    { lat: 47.5809, lng: -122.3363, title: "Downtown Store" },
+                    { lat: 47.5855, lng: -122.3366, title: "Mall Location" }
+                ];
+        
+                locations.forEach(location => {
+                    new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map: map,
+                        title: location.title,
+                        icon: {
+                            url: 'https://maps.app.goo.gl/mx4ZtYTWNht6rDBE7',
+                            scaledSize: new google.maps.Size(30, 30)
+                        }
+                    });
+                });
+            }
+        
+            // Toggle map type between roadmap and satellite
+            function toggleMapType() {
+                currentMapType = currentMapType === 'roadmap' ? 'satellite' : 'roadmap';
+                map.setMapTypeId(google.maps.MapTypeId[currentMapType.toUpperCase()]);
+            }
+        
+            // Get user's current location
+            function getCurrentLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            map.setCenter(pos);
+                            map.setZoom(15);
+        
+                            // Add marker for current location
+                            new google.maps.Marker({
+                                position: pos,
+                                map: map,
+                                title: "Your Location",
+                                icon: {
+                                    path: google.maps.SymbolPath.CIRCLE,
+                                    scale: 10,
+                                    fillColor: "#4285F4",
+                                    fillOpacity: 1,
+                                    strokeColor: "#ffffff",
+                                    strokeWeight: 2
+                                }
+                            });
+                        },
+                        () => {
+                            alert("Error: The Geolocation service failed.");
+                        }
+                    );
+                } else {
+                    alert("Error: Your browser doesn't support geolocation.");
+                }
+            }
+        
+            // Initialize map when page loads
+            window.onload = initMap;
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

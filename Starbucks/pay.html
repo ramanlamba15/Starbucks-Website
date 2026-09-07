@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Payment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar (copied from index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gift.html">GIFT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="oder.html">ORDER</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pay.html">PAY</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="store.html">STORE</a>
+                    </li>
+                </ul>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control" placeholder="Looking for something specific?">
+                </div>
+                <a href="#" class="account-icon">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Payment Progress -->
+    <div class="payment-progress py-4">
+        <div class="container">
+            <div class="progress-bar-custom">
+                <div class="progress-step completed">
+                    <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <span>Cart</span>
+                </div>
+                <div class="progress-step completed">
+                    <div class="step-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <span>Delivery</span>
+                </div>
+                <div class="progress-step active">
+                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                    <span>Payment</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-icon"><i class="fas fa-check"></i></div>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Payment Section -->
+    <section class="payment-section py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Payment Form -->
+                <div class="col-lg-8">
+                    <div class="payment-form-container">
+                        <h3 class="mb-4">Payment Details</h3>
+                        
+                        <!-- Payment Methods -->
+                        <div class="payment-methods mb-4">
+                            <h5>Select Payment Method</h5>
+                            <div class="method-options">
+                                <div class="payment-method active">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Credit Card</span>
+                                </div>
+                                <div class="payment-method">
+                                    <i class="fab fa-paypal"></i>
+                                    <span>PayPal</span>
+                                </div>
+                                <div class="payment-method">
+                                    <i class="fas fa-gift"></i>
+                                    <span>Gift Card</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credit Card Form -->
+                        <div class="card-form">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="cardName" placeholder="Name on Card">
+                                <label for="cardName">Name on Card</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="cardNumber" placeholder="Card Number">
+                                <label for="cardNumber">Card Number</label>
+                                <div class="card-icons">
+                                    <i class="fab fa-cc-visa"></i>
+                                    <i class="fab fa-cc-mastercard"></i>
+                                    <i class="fab fa-cc-amex"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="expiry" placeholder="MM/YY">
+                                        <label for="expiry">Expiry Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                                        <label for="cvv">CVV</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Billing Address -->
+                        <div class="billing-address mt-4">
+                            <h5>Billing Address</h5>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="sameAsDelivery">
+                                <label class="form-check-label" for="sameAsDelivery">
+                                    Same as delivery address
+                                </label>
+                            </div>
+                            <div class="address-form">
+                                <!-- Address fields here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="order-summary">
+                        <h4>Order Summary</h4>
+                        <div class="order-items">
+                            <div class="order-item">
+                                <img src="https://globalassets.starbucks.com/assets/f9a4cd143c4342abbb4f60b7fab4e6df.jpg" alt="Caramel Frappuccino">
+                                <div class="item-details">
+                                    <h6>Caramel Frappuccino</h6>
+                                    <span class="quantity">x1</span>
+                                    <span class="price">$4.95</span>
+                                </div>
+                            </div>
+                            <!-- More order items -->
+                        </div>
+                        <div class="price-breakdown">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal</span>
+                                <span>$4.95</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Tax</span>
+                                <span>$0.50</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Delivery</span>
+                                <span>$2.00</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between total">
+                                <strong>Total</strong>
+                                <strong>$7.45</strong>
+                            </div>
+                        </div>
+                        <button class="btn btn-success w-100 mt-4">Complete Payment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Navbar Styles (copied from index.html) */
+        .navbar {
+            background-color: #1e3932;
+        }
+        .navbar-brand img {
+            width: 50px;
+        }
+        .nav-link {
+            color: white !important;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+        .search-bar {
+            position: relative;
+            width: 300px;
+        }
+        .search-bar input {
+            border-radius: 20px;
+            padding-left: 35px;
+        }
+        .search-bar i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .account-icon {
+            color: white;
+            font-size: 1.2rem;
+            margin-left: 20px;
+        }
+
+        /* Payment Page Specific Styles */
+        .payment-progress {
+            background: #f8f9fa;
+        }
+
+        .progress-bar-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-bar-custom::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dee2e6;
+            z-index: 1;
+        }
+
+        .progress-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            transition: all 0.3s ease;
+        }
+
+        .progress-step.completed .step-icon {
+            background: #1e3932;
+            color: white;
+            border-color: #1e3932;
+        }
+
+        .progress-step.active .step-icon {
+            background: #fff;
+            color: #1e3932;
+            border-color: #1e3932;
+            transform: scale(1.1);
+        }
+
+        .payment-form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .payment-methods {
+            margin-bottom: 30px;
+        }
+
+        .method-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: #1e3932;
+        }
+
+        .payment-method.active {
+            border-color: #1e3932;
+            background: #f8f9fa;
+        }
+
+        .payment-method i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1e3932;
+        }
+
+        .card-icons {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .card-icons i {
+            margin-left: 5px;
+            font-size: 20px;
+            color: #6c757d;
+        }
+
+        .order-summary {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-details h6 {
+            margin-bottom: 5px;
+        }
+
+        .price-breakdown {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .total {
+            color: #1e3932;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .method-options {
+                flex-direction: column;
+            }
+            
+            .progress-bar-custom {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .progress-bar-custom::before {
+                display: none;
+            }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
